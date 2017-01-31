@@ -124,7 +124,7 @@ Professor = db.define_table('professor',
 
 #Tabela Empresa
 
-Aluno = db.define_table('empresa',
+Empresa = db.define_table('empresa',
     Field('nome','string',label='Nome'),
     Field('razao','string',label='Razão Social'),
     Field('cnpj','string',label='CNPJ'),

@@ -1,0 +1,101 @@
+timestamp: 2017-01-30T20:25:11.509422
+CREATE TABLE auth_user(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name CHAR(128),
+    last_name CHAR(128),
+    email CHAR(512),
+    password CHAR(512),
+    registration_key CHAR(512),
+    reset_password_key CHAR(512),
+    registration_id CHAR(512)
+);
+success!
+timestamp: 2017-01-30T20:25:11.526550
+CREATE TABLE auth_group(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    role CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2017-01-30T20:25:11.529789
+CREATE TABLE auth_membership(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE  
+);
+success!
+timestamp: 2017-01-30T20:25:11.533687
+CREATE TABLE auth_permission(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE  ,
+    name CHAR(512),
+    table_name CHAR(512),
+    record_id INTEGER
+);
+success!
+timestamp: 2017-01-30T20:25:11.537365
+CREATE TABLE auth_event(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    time_stamp TIMESTAMP,
+    client_ip CHAR(512),
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
+    origin CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2017-01-30T20:25:11.540914
+CREATE TABLE auth_cas(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
+    created_on TIMESTAMP,
+    service CHAR(512),
+    ticket CHAR(512),
+    renew CHAR(1)
+);
+success!
+timestamp: 2017-01-30T20:26:05.803737
+CREATE TABLE aluno(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome CHAR(512),
+    matricula INTEGER,
+    curso CHAR(512),
+    periodo INTEGER,
+    telefone INTEGER,
+    email CHAR(512),
+    documento CHAR(512)
+);
+success!
+timestamp: 2017-01-30T20:53:24.037367
+CREATE TABLE professor(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome CHAR(512),
+    cpf INTEGER,
+    curso CHAR(512),
+    telefone INTEGER,
+    email CHAR(512),
+    documento CHAR(512)
+);
+success!
+timestamp: 2017-01-30T20:53:24.092970
+CREATE TABLE empresa(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome CHAR(512),
+    razao CHAR(512),
+    cnpj CHAR(512),
+    telefone INTEGER,
+    email CHAR(512)
+);
+success!
+timestamp: 2017-01-30T21:06:33.680081
+CREATE TABLE estagio(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    empresa INTEGER REFERENCES empresa (id) ON DELETE CASCADE  ,
+    aluno INTEGER REFERENCES aluno (id) ON DELETE CASCADE  ,
+    professor INTEGER REFERENCES professor (id) ON DELETE CASCADE  ,
+    data_inicio DATE,
+    data_prevista DATE,
+    data_fim DATE,
+    es_situacao CHAR(512),
+    relatorio CHAR(512)
+);
+success!

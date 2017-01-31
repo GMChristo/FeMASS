@@ -57,4 +57,38 @@ def call():
     """
     return service()
 
+def aluno():
+    form = SQLFORM(Aluno)
+    if form.process().accepted:
+        session.flash = 'Novo aluno cadastrado!'
+        redirect(url('aluno'))
+    elif form.errors:
+        response.flash = 'Erros encontrados'
+    else:
+        if not response.flash:
+            response.flash = 'Preencha o form'    
+    return dict(form=form)
 
+def empresa():
+    form = SQLFORM(Empresa)
+    if form.process().accepted:
+        session.flash = 'Nova empresa cadastrado!'
+        redirect(url('empresa'))
+    elif form.errors:
+        response.flash = 'Erros encontrados'
+    else:
+        if not response.flash:
+            response.flash = 'Preencha o form'    
+    return dict(form=form)
+
+def professor():
+    form = SQLFORM(Professor)
+    if form.process().accepted:
+        session.flash = 'Novo professor cadastrado!'
+        redirect(url('professor'))
+    elif form.errors:
+        response.flash = 'Erros encontrados'
+    else:
+        if not response.flash:
+            response.flash = 'Preencha o form'    
+    return dict(form=form)
